@@ -2,7 +2,110 @@ document.addEventListener("DOMContentLoaded", () => {
   const activitiesList = document.getElementById("activities-list");
   const activitySelect = document.getElementById("activity");
   const signupForm = document.getElementById("signup-form");
+  const signupButton = signupForm.querySelector('button[type="submit"]');
   const messageDiv = document.getElementById("message");
+  let activitiesState = {};
+  const signupButtonDefaultText = signupButton.textContent;
+
+  function showMessage(text, type) {
+    messageDiv.textContent = text;
+    messageDiv.className = type;
+    messageDiv.classList.remove("hidden");
+
+    // Hide message after 5 seconds
+    setTimeout(() => {
+      messageDiv.classList.add("hidden");
+    }, 5000);
+  }
+
+  function setSignupLoading(isLoading) {
+    signupButton.disabled = isLoading;
+    signupButton.classList.toggle("button-loading", isLoading);
+
+    if (isLoading) {
+      signupButton.innerHTML = '<span class="button-spinner" aria-hidden="true"></span> Signing up...';
+      signupButton.setAttribute("aria-busy", "true");
+    } else {
+      signupButton.textContent = signupButtonDefaultText;
+      signupButton.removeAttribute("aria-busy");
+    }
+  }
+
+  function setParticipantDeleteLoading(button, isLoading) {
+    if (!button) {
+      return;
+    }
+
+    button.disabled = isLoading;
+    button.classList.toggle("participant-delete-loading", isLoading);
+
+    if (isLoading) {
+      button.innerHTML = '<span class="button-spinner participant-button-spinner" aria-hidden="true"></span>';
+      button.setAttribute("aria-busy", "true");
+    } else {
+      button.innerHTML = "&times;";
+      button.removeAttribute("aria-busy");
+    }
+  }
+
+  function renderActivities() {
+    activitiesList.innerHTML = "";
+    activitySelect.innerHTML = '<option value="">-- Select an activity --</option>';
+
+    // Render each activity with participants section
+    Object.entries(activitiesState).forEach(([name, details]) => {
+      const activityCard = document.createElement("div");
+      activityCard.className = "activity-card";
+
+      const spotsLeft = details.max_participants - details.participants.length;
+      const participantsItems = details.participants.length
+        ? details.participants
+            .map(
+              (participant) => `
+                <li class="participant-item">
+                  <div class="participant-row">
+                    <span class="participant-email">${participant}</span>
+                    <button
+                      type="button"
+                      class="participant-delete"
+                      data-activity="${encodeURIComponent(name)}"
+                      data-email="${encodeURIComponent(participant)}"
+                      aria-label="Unregister ${participant} from ${name}"
+                      title="Unregister participant"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                </li>
+              `
+            )
+            .join("")
+        : '<li class="participants-empty">No participants yet</li>';
+
+      activityCard.innerHTML = `
+        <h4>${name}</h4>
+        <p>${details.description}</p>
+        <p><strong>Schedule:</strong> ${details.schedule}</p>
+        <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+        <div class="participants-section">
+          <p class="participants-heading">
+            <strong>Participants Signed Up</strong>
+            <span class="participants-count">${details.participants.length}</span>
+          </p>
+          <ul class="participants-list">
+            ${participantsItems}
+          </ul>
+        </div>
+      `;
+
+      activitiesList.appendChild(activityCard);
+
+      const option = document.createElement("option");
+      option.value = name;
+      option.textContent = name;
+      activitySelect.appendChild(option);
+    });
+  }
 
   function showMessage(type, text) {
     messageDiv.textContent = text;
@@ -81,8 +184,9 @@ document.addEventListener("DOMContentLoaded", () => {
   signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const email = document.getElementById("email").value;
+    const email = document.getElementById("email").value.trim().toLowerCase();
     const activity = document.getElementById("activity").value;
+    setSignupLoading(true);
 
     try {
       const response = await fetch(
@@ -141,3 +245,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize app
   fetchActivities();
 });
+
