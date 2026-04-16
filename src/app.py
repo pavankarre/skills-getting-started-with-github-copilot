@@ -74,6 +74,18 @@ activities = {
         "schedule": "Fridays, 4:00 PM - 5:30 PM",
         "max_participants": 12,
         "participants": ["marcus@mergington.edu", "claire@mergington.edu"]
+    },
+    "Tennis Club": {
+        "description": "Master tennis techniques and compete in matches",
+        "schedule": "Tuesdays, Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 14,
+        "participants": ["ryan@mergington.edu", "megan@mergington.edu"]
+    },
+    "Swimming Team": {
+        "description": "Train for competitive swimming and participate in regional meets",
+        "schedule": "Mondays, Wednesdays, Fridays, 4:30 PM - 5:30 PM",
+        "max_participants": 20,
+        "participants": ["tyler@mergington.edu"]
     }
 }
 
@@ -102,9 +114,6 @@ def signup_for_activity(activity_name: str, email: str):
     if email in activity["participants"]:
         raise HTTPException(status_code=400, detail="Student already signed up")
 
-    # Validate activity is not full
-    if len(activity["participants"]) >= activity["max_participants"]:
-        raise HTTPException(status_code=400, detail="Activity is full")
-# Add student
+   # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
