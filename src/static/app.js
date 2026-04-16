@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .map(
                   (participant) => `
                     <li class="participant-item">
-                      <span>${participant}</span>
+                      <span class="participant-email">${participant}</span>
                       <button
                         type="button"
                         class="delete-participant"
