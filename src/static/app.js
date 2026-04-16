@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     activitiesList.innerHTML = "";
     activitySelect.innerHTML = '<option value="">-- Select an activity --</option>';
 
+    // Render each activity with participants section
     Object.entries(activitiesState).forEach(([name, details]) => {
       const activityCard = document.createElement("div");
       activityCard.className = "activity-card";
