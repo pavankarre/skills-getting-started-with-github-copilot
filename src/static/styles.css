@@ -59,11 +59,17 @@ section h3 {
 
 .activity-card {
   margin-bottom: 15px;
-  padding: 16px;
-  border: 1px solid #d8e0ef;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #ffffff 0%, #f4f7ff 100%);
-  box-shadow: 0 6px 18px rgba(26, 35, 126, 0.08);
+  padding: 18px;
+  border: 1px solid #d0dbf3;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #ffffff 0%, #f0f5ff 100%);
+  box-shadow: 0 10px 24px rgba(26, 35, 126, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(26, 35, 126, 0.14);
 }
 
 .activity-card h4 {
@@ -77,10 +83,10 @@ section h3 {
 
 .participants-section {
   margin-top: 12px;
-  padding: 12px;
-  background-color: #eef3ff;
-  border: 1px solid #cfdcff;
-  border-radius: 8px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #edf3ff 0%, #e4edff 100%);
+  border: 1px solid #c7d7ff;
+  border-radius: 10px;
 }
 
 .participants-heading {
@@ -103,21 +109,22 @@ section h3 {
 
 .participants-list {
   margin: 0;
-  padding: 0;
+  padding-left: 0;
   list-style: none;
   color: #1f3a5b;
 }
 
-.participants-list li {
+.participant-item {
   margin-bottom: 6px;
-  padding: 6px 8px;
+  padding: 7px 8px;
   border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.75);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   word-break: break-word;
+  position: relative;
 }
 
 .participants-list li:last-child {
@@ -162,6 +169,14 @@ section h3 {
   outline-offset: 2px;
 }
 
+.participant-delete-loading {
+  cursor: wait;
+}
+
+.participant-delete-loading:hover {
+  transform: none;
+}
+
 .form-group {
   margin-bottom: 15px;
 }
@@ -194,6 +209,40 @@ button {
 
 button:hover {
   background-color: #3949ab;
+}
+
+button:disabled {
+  opacity: 0.8;
+  cursor: wait;
+}
+
+.button-loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.button-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: button-spin 0.6s linear infinite;
+}
+
+.participant-button-spinner {
+  width: 10px;
+  height: 10px;
+  border-color: rgba(182, 41, 41, 0.28);
+  border-top-color: #b62929;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .message {
