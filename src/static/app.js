@@ -62,17 +62,19 @@ document.addEventListener("DOMContentLoaded", () => {
             .map(
               (participant) => `
                 <li class="participant-item">
-                  <span class="participant-email">${participant}</span>
-                  <button
-                    type="button"
-                    class="participant-delete"
-                    data-activity="${encodeURIComponent(name)}"
-                    data-email="${encodeURIComponent(participant)}"
-                    aria-label="Unregister ${participant} from ${name}"
-                    title="Unregister participant"
-                  >
-                    &times;
-                  </button>
+                  <div class="participant-row">
+                    <span class="participant-email">${participant}</span>
+                    <button
+                      type="button"
+                      class="participant-delete"
+                      data-activity="${encodeURIComponent(name)}"
+                      data-email="${encodeURIComponent(participant)}"
+                      aria-label="Unregister ${participant} from ${name}"
+                      title="Unregister participant"
+                    >
+                      &times;
+                    </button>
+                  </div>
                 </li>
               `
             )
@@ -139,17 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (response.ok) {
-        if (
-          activitiesState[activity] &&
-          !activitiesState[activity].participants.includes(email)
-        ) {
-          activitiesState[activity].participants.push(email);
-          renderActivities();
-        }
-
         showMessage(result.message, "success");
         signupForm.reset();
-        fetchActivities();
+        await fetchActivities();
       } else {
         showMessage(result.detail || "An error occurred", "error");
       }
@@ -183,15 +177,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (response.ok) {
-        if (activitiesState[activity]) {
-          activitiesState[activity].participants = activitiesState[activity].participants.filter(
-            (participantEmail) => participantEmail !== email
-          );
-          renderActivities();
-        }
-
         showMessage(result.message, "success");
-        fetchActivities();
+        await fetchActivities();
       } else {
         showMessage(result.detail || "Failed to unregister participant.", "error");
       }

@@ -116,6 +116,9 @@ section h3 {
 
 .participant-item {
   margin-bottom: 6px;
+}
+
+.participant-row {
   padding: 7px 8px;
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.75);
@@ -124,7 +127,6 @@ section h3 {
   justify-content: space-between;
   gap: 10px;
   word-break: break-word;
-  position: relative;
 }
 
 .participants-list li:last-child {
@@ -133,6 +135,8 @@ section h3 {
 
 .participants-empty {
   display: block;
+  margin-left: 0;
+  list-style: none;
   color: #5f6f86;
   font-style: italic;
 }
