@@ -81,105 +81,53 @@ section h3 {
   margin-bottom: 8px;
 }
 
-/* Participants section styles */
-.participants-section {
-  margin-top: 12px;
-  padding: 12px 14px;
-  background: linear-gradient(180deg, #edf3ff 0%, #e4edff 100%);
-  border: 1px solid #c7d7ff;
-  border-radius: 10px;
-}
-
-.participants-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  color: #16236a;
-}
-
-.participants-count {
-  min-width: 24px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background-color: #1a237e;
-  color: #fff;
-  font-size: 0.85rem;
-  text-align: center;
-}
-
 .participants-list {
-  margin: 0;
-  padding-left: 0;
   list-style: none;
-  color: #1f3a5b;
+  margin: 0;
+  padding: 0;
 }
 
 .participant-item {
-  margin-bottom: 6px;
-}
-
-.participant-row {
-  padding: 7px 8px;
-  border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.75);
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
-  word-break: break-word;
-}
-
-.participants-list li:last-child {
-  margin-bottom: 0;
-}
-
-.participants-empty {
-  display: block;
-  margin-left: 0;
-  list-style: none;
-  color: #5f6f86;
-  font-style: italic;
+  padding: 6px 0;
+  border-bottom: 1px solid #e9e9e9;
 }
 
 .participant-email {
   flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
-.participant-delete {
-  border: 1px solid #f0b6b6;
-  background-color: #fff1f1;
-  color: #b62929;
-  width: 26px;
-  height: 26px;
-  border-radius: 999px;
-  padding: 0;
-  font-size: 20px;
+.participant-item:last-child {
+  border-bottom: none;
+}
+
+.delete-participant {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #ef9a9a;
+  background-color: #ffebee;
+  color: #c62828;
+  font-weight: bold;
   line-height: 1;
   display: inline-flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.participant-delete:hover {
-  background-color: #ffe1e1;
-  border-color: #e99e9e;
-  transform: scale(1.06);
+.delete-participant:hover {
+  background-color: #ffcdd2;
 }
 
-.participant-delete:focus-visible {
-  outline: 2px solid #1a237e;
-  outline-offset: 2px;
-}
-
-.participant-delete-loading {
-  cursor: wait;
-}
-
-.participant-delete-loading:hover {
-  transform: none;
+.empty-state {
+  color: #666;
+  font-style: italic;
 }
 
 .form-group {
@@ -201,7 +149,7 @@ section h3 {
   font-size: 16px;
 }
 
-button {
+#signup-form button {
   background-color: #1a237e;
   color: white;
   border: none;
@@ -212,7 +160,7 @@ button {
   transition: background-color 0.2s;
 }
 
-button:hover {
+#signup-form button:hover {
   background-color: #3949ab;
 }
 
