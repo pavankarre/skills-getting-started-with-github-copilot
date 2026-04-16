@@ -59,10 +59,11 @@ section h3 {
 
 .activity-card {
   margin-bottom: 15px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  padding: 16px;
+  border: 1px solid #d8e0ef;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7ff 100%);
+  box-shadow: 0 6px 18px rgba(26, 35, 126, 0.08);
 }
 
 .activity-card h4 {
@@ -72,6 +73,93 @@ section h3 {
 
 .activity-card p {
   margin-bottom: 8px;
+}
+
+.participants-section {
+  margin-top: 12px;
+  padding: 12px;
+  background-color: #eef3ff;
+  border: 1px solid #cfdcff;
+  border-radius: 8px;
+}
+
+.participants-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #16236a;
+}
+
+.participants-count {
+  min-width: 24px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background-color: #1a237e;
+  color: #fff;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.participants-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #1f3a5b;
+}
+
+.participants-list li {
+  margin-bottom: 6px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  word-break: break-word;
+}
+
+.participants-list li:last-child {
+  margin-bottom: 0;
+}
+
+.participants-empty {
+  display: block;
+  color: #5f6f86;
+  font-style: italic;
+}
+
+.participant-email {
+  flex: 1;
+}
+
+.participant-delete {
+  border: 1px solid #f0b6b6;
+  background-color: #fff1f1;
+  color: #b62929;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.participant-delete:hover {
+  background-color: #ffe1e1;
+  border-color: #e99e9e;
+  transform: scale(1.06);
+}
+
+.participant-delete:focus-visible {
+  outline: 2px solid #1a237e;
+  outline-offset: 2px;
 }
 
 .form-group {
